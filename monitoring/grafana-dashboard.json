@@ -1,0 +1,172 @@
+{
+  "dashboard": {
+    "title": "Fraud Detection System Dashboard",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Transaction Throughput",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(transactions_processed_total[5m])",
+            "legendFormat": "Processed"
+          },
+          {
+            "expr": "rate(transactions_alerted_total[5m])",
+            "legendFormat": "Alerted"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Alert Rate by Severity",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(transactions_alerted_total{severity=\"1\"}[5m])",
+            "legendFormat": "Severity 1"
+          },
+          {
+            "expr": "rate(transactions_alerted_total{severity=\"2\"}[5m])",
+            "legendFormat": "Severity 2"
+          },
+          {
+            "expr": "rate(transactions_alerted_total{severity=\"3\"}[5m])",
+            "legendFormat": "Severity 3"
+          },
+          {
+            "expr": "rate(transactions_alerted_total{severity=\"4\"}[5m])",
+            "legendFormat": "Severity 4"
+          },
+          {
+            "expr": "rate(transactions_alerted_total{severity=\"5\"}[5m])",
+            "legendFormat": "Severity 5"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Processing Time (p95)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(transactions_processing_time_bucket[5m]))",
+            "legendFormat": "p95"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(transactions_processing_time_bucket[5m]))",
+            "legendFormat": "p99"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(transactions_errors_total[5m])",
+            "legendFormat": "Errors"
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      },
+      {
+        "id": 5,
+        "title": "Total Transactions",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "transactions_processed_total",
+            "legendFormat": "Total Processed"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 16
+        }
+      },
+      {
+        "id": 6,
+        "title": "Total Alerts",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "transactions_alerted_total",
+            "legendFormat": "Total Alerted"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 6,
+          "y": 16
+        }
+      },
+      {
+        "id": 7,
+        "title": "Notification Success Rate",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "sum(rate(notifications_sent_total{status=\"success\"}[5m])) / sum(rate(notifications_sent_total[5m]))",
+            "legendFormat": "Success Rate"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 12,
+          "y": 16
+        }
+      },
+      {
+        "id": 8,
+        "title": "Rule Execution Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(rules_execution_time_sum[5m]) / rate(rules_execution_time_count[5m])",
+            "legendFormat": "{{rule}}"
+          }
+        ],
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 18,
+          "y": 16
+        }
+      }
+    ],
+    "refresh": "10s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    }
+  }
+}

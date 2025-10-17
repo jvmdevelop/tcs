@@ -1,36 +1,53 @@
 package com.jvmd.transationapp.model;
-
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.mapping.Table;
-
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
-
+@Entity
+@Table(name = "transactions")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table
 public class Transactions {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
+    @Column(nullable = false, unique = true)
+    private String correlationId;
+    @Column(nullable = false)
     private BigDecimal amount;
-
+    @Column(nullable = false, name = "account_from")
     private String from;
+    @Column(nullable = false, name = "account_to")
     private String to;
-
-    private LocalDateTime dateTime;
-
-    private EStatus status;
-
-    private float mlScore;
-
-
+    @Column(nullable = false)
+    private String type;  
+    @Column(nullable = false)
+    private LocalDateTime timestamp;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EStatus status = EStatus.PROCESSING;
+    @Column
+    private Double mlScore;
+    @Column(columnDefinition = "TEXT")
+    private String alertReasons;  
+    @Column(columnDefinition = "TEXT")
+    private String processingHistory;  
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+    @Column
+    private String ipAddress;
+    @Column
+    private String deviceId;
+    @Column
+    private String location;
 }

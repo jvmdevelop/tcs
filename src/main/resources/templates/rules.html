@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rules Management - Fraud Detection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><i class="fas fa-gavel"></i> Rules Management</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="/admin/rules/new" class="btn btn-sm btn-success">
+                <i class="fas fa-plus"></i> Create New Rule
+            </a>
+        </div>
+    </div>
+
+    <!-- Rules Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Priority</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Severity</th>
+                    <th>Enabled</th>
+                    <th>Executions</th>
+                    <th>Alerts</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="rule : ${rules}">
+                    <td><span class="badge bg-secondary" th:text="${rule.priority}">0</span></td>
+                    <td>
+                        <strong th:text="${rule.name}">Rule Name</strong>
+                        <br>
+                        <small class="text-muted" th:text="${rule.description}">Description</small>
+                    </td>
+                    <td><span class="badge bg-info" th:text="${rule.type}">THRESHOLD</span></td>
+                    <td>
+                        <span th:class="${rule.severity >= 4} ? 'badge bg-danger' : (${rule.severity >= 3} ? 'badge bg-warning' : 'badge bg-success')" 
+                              th:text="${rule.severity}">1</span>
+                    </td>
+                    <td>
+                        <form th:action="@{/admin/rules/{id}/toggle(id=${rule.id})}" method="post" style="display:inline;">
+                            <button type="submit" 
+                                    th:class="${rule.enabled} ? 'btn btn-sm btn-success' : 'btn btn-sm btn-secondary'"
+                                    th:title="${rule.enabled} ? 'Disable' : 'Enable'">
+                                <i th:class="${rule.enabled} ? 'fas fa-toggle-on' : 'fas fa-toggle-off'"></i>
+                                <span th:text="${rule.enabled} ? 'Enabled' : 'Disabled'">Enabled</span>
+                            </button>
+                        </form>
+                    </td>
+                    <td th:text="${rule.executionCount}">0</td>
+                    <td th:text="${rule.alertCount}">0</td>
+                    <td>
+                        <a th:href="@{/admin/rules/{id}/edit(id=${rule.id})}" 
+                           class="btn btn-sm btn-primary" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a th:href="@{/admin/rules/{id}/history(id=${rule.id})}" 
+                           class="btn btn-sm btn-info" title="History">
+                            <i class="fas fa-history"></i>
+                        </a>
+                        <form th:action="@{/admin/rules/{id}/delete(id=${rule.id})}" 
+                              method="post" style="display:inline;"
+                              onsubmit="return confirm('Are you sure you want to delete this rule?');">
+                            <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${rules.isEmpty()}">
+                    <td colspan="8" class="text-center text-muted">No rules configured</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Rule Type Examples -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Rule Configuration Examples</h5>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="ruleExamples">
+                        <!-- Threshold Rule -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#thresholdExample">
+                                    Threshold Rule Example
+                                </button>
+                            </h2>
+                            <div id="thresholdExample" class="accordion-collapse collapse" data-bs-parent="#ruleExamples">
+                                <div class="accordion-body">
+                                    <pre><code>{
+  "field": "amount",
+  "operator": ">",
+  "value": 100000
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pattern Rule -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#patternExample">
+                                    Pattern Rule Example
+                                </button>
+                            </h2>
+                            <div id="patternExample" class="accordion-collapse collapse" data-bs-parent="#ruleExamples">
+                                <div class="accordion-body">
+                                    <pre><code>{
+  "type": "multiple_small_transactions",
+  "timeWindowMinutes": 10,
+  "minTransactions": 5,
+  "maxAmountPerTransaction": 1000,
+  "accountField": "from"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Composite Rule -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#compositeExample">
+                                    Composite Rule Example
+                                </button>
+                            </h2>
+                            <div id="compositeExample" class="accordion-collapse collapse" data-bs-parent="#ruleExamples">
+                                <div class="accordion-body">
+                                    <pre><code>{
+  "operator": "AND",
+  "conditions": [
+    {"type": "amount", "operator": ">", "value": 50000},
+    {"type": "nighttime", "startHour": 22, "endHour": 6}
+  ]
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ML Rule -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mlExample">
+                                    ML Rule Example
+                                </button>
+                            </h2>
+                            <div id="mlExample" class="accordion-collapse collapse" data-bs-parent="#ruleExamples">
+                                <div class="accordion-body">
+                                    <pre><code>{
+  "modelPath": "models/fraud_model.pt",
+  "threshold": 0.7,
+  "modelVersion": "1.0"
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
