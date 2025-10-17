@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:16
-    container_name: fraud-postgres
+    container_name: postgresql
     environment:
       POSTGRES_DB: fraud_detection
       POSTGRES_USER: postgres
