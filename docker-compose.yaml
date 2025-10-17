@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:16
+    container_name: db
+    environment:
+      POSTGRES_DB: ta-app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: deltaq123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+
+volumes:
+  pgdata:
