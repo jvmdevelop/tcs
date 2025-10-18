@@ -67,7 +67,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'org.apache.commons:commons-csv:1.10.0'
-    
+    implementation project(":ml-model")
     // Dev Tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     

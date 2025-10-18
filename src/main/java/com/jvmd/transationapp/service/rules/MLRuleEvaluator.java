@@ -1,17 +1,17 @@
 package com.jvmd.transationapp.service.rules;
 
+import ai.djl.Model;
 import ai.djl.MalformedModelException;
 import ai.djl.inference.Predictor;
-import ai.djl.repository.zoo.Criteria;
-import ai.djl.repository.zoo.ModelNotFoundException;
-import ai.djl.repository.zoo.ZooModel;
-import ai.djl.training.util.ProgressBar;
-import ai.djl.translate.TranslateException;
-import ai.djl.translate.Translator;
-import ai.djl.translate.TranslatorContext;
 import ai.djl.ndarray.NDArray;
 import ai.djl.ndarray.NDList;
 import ai.djl.ndarray.NDManager;
+import ai.djl.nn.Block;
+import ai.djl.translate.Batchifier;
+import ai.djl.translate.TranslateException;
+import ai.djl.translate.Translator;
+import ai.djl.translate.TranslatorContext;
+import com.jvmd.fraud.model.FraudDetectionModel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.Rule;
@@ -23,6 +23,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
@@ -31,12 +33,25 @@ import java.util.Map;
 public class MLRuleEvaluator {
 
     private final ObjectMapper objectMapper;
-    @Value("${app.ml.model-path:models/fraud-detection-1.0-0000.params}")
-    private String defaultModelPath;
+    
+    @Value("${app.ml.model-path:ml-model/models}")
+    private String modelBasePath;
+    
+    @Value("${app.ml.model-name:fraud-detection}")
+    private String modelName;
+    
+    @Value("${app.ml.model-version:1.0}")
+    private String modelVersion;
+    
     @Value("${app.ml.threshold:0.7}")
     private double defaultThreshold;
-    private ZooModel<float[], Float> model;
+    
+    private Model model;
     private Predictor<float[], Float> predictor;
+    private NDManager manager;
+    private final int inputSize = 8;
+    private volatile boolean modelLoaded = false;
+    private volatile boolean mlAvailable = true;
 
     public MLRuleEvaluator(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
@@ -45,34 +60,116 @@ public class MLRuleEvaluator {
     @PostConstruct
     public void initModel() {
         try {
-            loadModel(defaultModelPath);
+            testMLAvailability();
+            loadModel();
+            modelLoaded = true;
+            log.info("ML model initialized successfully");
+        } catch (UnsatisfiedLinkError | NoClassDefFoundError e) {
+            mlAvailable = false;
+            log.warn("ML engine (PyTorch) not available: {}. ML rules will be disabled.", e.getMessage());
+            log.info("To enable ML rules, ensure PyTorch native libraries are installed.");
         } catch (Exception e) {
-            log.warn("Failed to load ML model at startup: {}. ML rules will be disabled until model is loaded.",
+            log.warn("Failed to load ML model at startup: {}. ML rules will be disabled until model is loaded.", 
                     e.getMessage());
+            log.debug("Model loading error details", e);
+            modelLoaded = false;
         }
     }
 
-    public synchronized void loadModel(String modelPath) throws ModelNotFoundException, MalformedModelException, IOException {
+    private void testMLAvailability() {
+        try {
+            if (manager == null) {
+                manager = NDManager.newBaseManager();
+            }
+        } catch (UnsatisfiedLinkError | NoClassDefFoundError e) {
+            mlAvailable = false;
+            throw e;
+        }
+    }
+
+    public synchronized void loadModel() throws IOException, MalformedModelException {
+        if (!mlAvailable) {
+            throw new IOException("ML engine not available. PyTorch native libraries may be missing.");
+        }
+
+        if (manager == null) {
+            try {
+                manager = NDManager.newBaseManager();
+            } catch (UnsatisfiedLinkError | NoClassDefFoundError e) {
+                mlAvailable = false;
+                throw new IOException("ML engine not available. PyTorch native libraries may be missing.", e);
+            }
+        }
+        
+        closeResources();
+        
+        Path modelDir = Paths.get(modelBasePath);
+        String fullModelName = modelName + "-" + modelVersion;
+        
+
+        if (!Files.exists(modelDir)) {
+            throw new IOException("Model directory does not exist: " + modelDir.toAbsolutePath());
+        }
+        
+        Path paramsFile = modelDir.resolve(fullModelName + "-0000.params");
+        if (!Files.exists(paramsFile)) {
+            throw new IOException("Model params file not found: " + paramsFile.toAbsolutePath() + 
+                    ". Please train the model first using ml-model project.");
+        }
+        
+        try {
+
+            model = Model.newInstance(modelName);
+            
+
+            Block block = createFraudDetectionBlock();
+            model.setBlock(block);
+            
+
+            model.load(modelDir, fullModelName);
+            
+            predictor = model.newPredictor(new FraudTranslator());
+            
+            log.info("ML model loaded successfully from: {} (version: {})", modelDir.toAbsolutePath(), modelVersion);
+            modelLoaded = true;
+            
+        } catch (Exception e) {
+            closeResources();
+            throw new IOException("Failed to load model: " + e.getMessage(), e);
+        }
+    }
+
+    private Block createFraudDetectionBlock() throws IOException {
+        Path modelDir = Paths.get(modelBasePath);
+        String fullModelName = modelName + "-" + modelVersion;
+        Path modelPath = modelDir.resolve(fullModelName + "-0000.params");
+
+        FraudDetectionModel fraudModel = new FraudDetectionModel(inputSize, new int[]{64, 32});
+        return fraudModel.newBlock(model, modelPath, null);
+    }
+
+    public boolean isModelLoaded() {
+        return mlAvailable && modelLoaded && predictor != null;
+    }
+    
+    private void closeResources() {
         if (predictor != null) {
             predictor.close();
+            predictor = null;
         }
         if (model != null) {
             model.close();
+            model = null;
         }
-        Criteria<float[], Float> criteria = Criteria.builder()
-                .setTypes(float[].class, Float.class)
-                .optModelPath(Paths.get(modelPath))
-                .optTranslator(new FraudTranslator())
-                .optProgress(new ProgressBar())
-                .build();
-        model = criteria.loadModel();
-        predictor = model.newPredictor();
-        log.info("ML model loaded successfully from: {}", modelPath);
     }
 
     public boolean evaluate(Rule rule, Transactions transaction) {
         try {
-            if (predictor == null) {
+            if (!mlAvailable) {
+                log.debug("ML engine not available, skipping ML rule evaluation");
+                return false;
+            }
+            if (!isModelLoaded()) {
                 log.warn("ML model not loaded, skipping ML rule evaluation");
                 return false;
             }
@@ -168,11 +265,10 @@ public class MLRuleEvaluator {
 
     @PreDestroy
     public void cleanup() {
-        if (predictor != null) {
-            predictor.close();
-        }
-        if (model != null) {
-            model.close();
+        log.info("Cleaning up ML model resources");
+        closeResources();
+        if (manager != null) {
+            manager.close();
         }
     }
 
@@ -180,14 +276,19 @@ public class MLRuleEvaluator {
         @Override
         public NDList processInput(TranslatorContext ctx, float[] input) {
             NDManager manager = ctx.getNDManager();
-            NDArray array = manager.create(input);
+            NDArray array = manager.create(input).expandDims(0);
             return new NDList(array);
         }
 
         @Override
         public Float processOutput(TranslatorContext ctx, NDList list) {
             NDArray output = list.singletonOrThrow();
-            return output.toFloatArray()[0];
+            return output.getFloat();
+        }
+        
+        @Override
+        public Batchifier getBatchifier() {
+            return Batchifier.STACK;
         }
     }
 }

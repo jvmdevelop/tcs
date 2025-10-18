@@ -31,9 +31,7 @@ public class NotificationService {
     private final WebhookNotificationSender webhookSender;
     private final ObjectMapper objectMapper;
 
-    /**
-     * Отправить уведомления об алерте
-     */
+
     public void sendAlertNotifications(Transactions transaction, RuleEngine.RuleEvaluationResult result) {
         String correlationId = transaction.getCorrelationId();
         MDC.put("correlationId", correlationId);
