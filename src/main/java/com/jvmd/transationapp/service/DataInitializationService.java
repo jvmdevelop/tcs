@@ -1,10 +1,13 @@
 package com.jvmd.transationapp.service;
 
+import com.jvmd.transationapp.config.NotificationSendProperties;
 import com.jvmd.transationapp.model.*;
 import com.jvmd.transationapp.repository.NotificationConfigRepository;
 import com.jvmd.transationapp.repository.RuleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.cfg.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,7 @@ public class DataInitializationService {
 
     private final RuleRepository ruleRepository;
     private final NotificationConfigRepository notificationConfigRepository;
+    private final NotificationSendProperties notificationSendProperties;
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional
@@ -95,7 +99,7 @@ public class DataInitializationService {
             emailConfig.setChannel(NotificationChannel.EMAIL);
             emailConfig.setEnabled(false);
             emailConfig.setMinSeverity(3);
-            emailConfig.setConfiguration("{\"to\":\"admin@example.com\",\"subject\":\"Fraud Alert\"}");
+            emailConfig.setConfiguration("{\"to\":\"" + notificationSendProperties.getMail() +"\",\"subject\":\"Fraud Alert\"}");
             emailConfig.setMessageTemplate("🚨 FRAUD ALERT\\n\\nTransaction ID: {{transactionId}}\\nCorrelation ID: {{correlationId}}\\nAmount: {{amount}}\\nFrom: {{from}}\\nTo: {{to}}\\nType: {{type}}\\nTime: {{timestamp}}\\n\\nSeverity: {{severity}}/5\\nML Score: {{mlScore}}\\nTriggered Rules: {{triggeredRules}}\\n\\nReasons: {{reasons}}\\n\\nDetails: {{detailsUrl}}");
             notificationConfigRepository.save(emailConfig);
 
@@ -104,7 +108,7 @@ public class DataInitializationService {
             telegramConfig.setChannel(NotificationChannel.TELEGRAM);
             telegramConfig.setEnabled(false);
             telegramConfig.setMinSeverity(3);
-            telegramConfig.setConfiguration("{\"chatId\":\"YOUR_CHAT_ID\"}");
+            telegramConfig.setConfiguration("{\"chatId\":\"%s\"}".formatted(notificationSendProperties.getTgId()));
             telegramConfig.setMessageTemplate("🚨 <b>FRAUD ALERT</b>\\n\\n<b>Transaction:</b> {{transactionId}}\\n<b>Amount:</b> {{amount}}\\n<b>From:</b> {{from}}\\n<b>To:</b> {{to}}\\n<b>Severity:</b> {{severity}}/5\\n<b>ML Score:</b> {{mlScore}}\\n\\n<b>Reasons:</b> {{reasons}}\\n\\n<a href='{{detailsUrl}}'>View Details</a>");
             notificationConfigRepository.save(telegramConfig);
 
