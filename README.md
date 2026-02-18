@@ -1,4 +1,4 @@
-<h1 align="center">transaction checker service</h1>
+<h1 align="center">tcs</h1>
 <p align="center" >
   <img alt="Java" src="https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white">
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=spring-boot&logoColor=white">
@@ -13,7 +13,7 @@
 
 <br>
 
-**transaction checker service** is an intelligent fraud detection system powered by Spring Boot and AI, featuring real-time transaction monitoring, machine learning-based fraud detection, and comprehensive monitoring capabilities.
+**tcs** is an intelligent fraud detection system powered by Spring Boot and AI, featuring real-time transaction monitoring, machine learning-based fraud detection, and comprehensive monitoring capabilities.
 
 ## Features
 
