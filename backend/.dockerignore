@@ -1,7 +1,7 @@
 .git
 .gradle
 build
-.idea
+../.idea
 *.iml
 *.log
 logs

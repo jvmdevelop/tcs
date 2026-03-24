@@ -1,6 +1,6 @@
 FROM gradle:8.5-jdk21 AS build
 WORKDIR /app
-COPY . .
+COPY .. .
 RUN gradle build -x test --no-daemon
 
 # Use Debian-based image for better C++ library support (needed for PyTorch)

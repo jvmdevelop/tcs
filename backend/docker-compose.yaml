@@ -149,7 +149,7 @@ services:
 
   app:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     container_name: fraud-detection-app
     environment:
@@ -176,8 +176,8 @@ services:
 
   frontend:
     build:
-      context: ./fraud-detection-frontend
-      dockerfile: Dockerfile
+      context: ../frontend
+      dockerfile: ../frontend/Dockerfile
     container_name: fraud-detection-frontend
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8080/api
