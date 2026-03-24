@@ -136,7 +136,7 @@ public class NotificationService {
 
     private String getDefaultTemplate() {
         return """
-            🚨 FRAUD ALERT
+            FRAUD ALERT
             
             Transaction ID: {{transactionId}}
             Correlation ID: {{correlationId}}
