@@ -1,4 +1,4 @@
-package com.jvmd.transationapp.service.rules.impl;
+package com.jvmd.transationapp.service.rules.evaluator.impl;
 
 import ai.djl.Model;
 import ai.djl.MalformedModelException;
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.Rule;
 import com.jvmd.transationapp.model.Transactions;
-import com.jvmd.transationapp.service.rules.RuleEvaluator;
+import com.jvmd.transationapp.service.rules.evaluator.RuleEvaluator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

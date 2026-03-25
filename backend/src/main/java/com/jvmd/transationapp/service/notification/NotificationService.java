@@ -1,6 +1,7 @@
 package com.jvmd.transationapp.service.notification;
 
 import com.jvmd.transationapp.common.NotificationEvent;
+import com.jvmd.transationapp.common.RuleEvaluationResult;
 import com.jvmd.transationapp.model.Transactions;
 import com.jvmd.transationapp.repository.NotificationConfigRepository;
 import com.jvmd.transationapp.service.rules.RuleEngine;
@@ -18,7 +19,7 @@ public class NotificationService {
     private final NotificationConfigRepository configRepository;
     private final ApplicationEventPublisher publisher;
 
-    public void sendAlertNotifications(Transactions transaction, RuleEngine.RuleEvaluationResult result) {
+    public void sendAlertNotifications(Transactions transaction, RuleEvaluationResult result) {
         String correlationId = transaction.getCorrelationId();
         MDC.put("correlationId", correlationId);
         MDC.put("component", "notification");

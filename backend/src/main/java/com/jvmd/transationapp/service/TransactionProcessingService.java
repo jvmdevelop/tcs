@@ -1,6 +1,7 @@
 package com.jvmd.transationapp.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jvmd.transationapp.common.RuleEvaluationResult;
 import com.jvmd.transationapp.model.EStatus;
 import com.jvmd.transationapp.model.Transactions;
 import com.jvmd.transationapp.repository.TransactionRepository;
@@ -35,7 +36,7 @@ public class TransactionProcessingService {
             Transactions transaction = transactionRepository.findById(transactionId)
                     .orElseThrow(() -> new RuntimeException("Transaction not found: " + transactionId));
             addProcessingStep(transaction, "PROCESSING_STARTED", "Transaction processing started");
-            RuleEngine.RuleEvaluationResult result = ruleEngine.evaluateTransaction(transaction);
+            RuleEvaluationResult result = ruleEngine.evaluateTransaction(transaction);
             if (result.isAlerted()) {
                 transaction.setStatus(EStatus.ALERTED);
                 transaction.setAlertReasons(objectMapper.writeValueAsString(result.getAlertReasons()));

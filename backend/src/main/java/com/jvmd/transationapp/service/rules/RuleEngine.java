@@ -1,8 +1,10 @@
 package com.jvmd.transationapp.service.rules;
 
+import com.jvmd.transationapp.common.RuleEvaluationResult;
 import com.jvmd.transationapp.model.Rule;
 import com.jvmd.transationapp.model.Transactions;
 import com.jvmd.transationapp.repository.RuleRepository;
+import com.jvmd.transationapp.service.rules.evaluator.Evaluators;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +19,9 @@ import java.util.*;
 @RequiredArgsConstructor
 public class RuleEngine {
     private final RuleRepository ruleRepository;
+    private final Evaluators evaluators;
     private List<Rule> activeRules = new ArrayList<>();
+
 
     @PostConstruct
     public void loadRules() {
@@ -78,17 +82,8 @@ public class RuleEngine {
     }
 
     private boolean evaluateRule(Rule rule, Transactions transaction) {
-        return ;
+        return evaluators.getEvaluator(rule).evaluate(rule, transaction);
     }
 
-    @Data
-    public static class RuleEvaluationResult {
-        private UUID transactionId;
-        private String correlationId;
-        private boolean alerted = false;
-        private List<Rule> triggeredRules;
-        private List<String> alertReasons;
-        private int maxSeverity = 0;
-        private Double mlScore;
-    }
+
 }

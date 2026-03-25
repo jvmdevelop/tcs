@@ -1,5 +1,6 @@
 package com.jvmd.transationapp.service.notification;
 
+import com.jvmd.transationapp.common.RuleEvaluationResult;
 import com.jvmd.transationapp.config.NotificationProperties;
 import com.jvmd.transationapp.model.NotificationConfig;
 import com.jvmd.transationapp.model.Transactions;
@@ -18,7 +19,7 @@ public class NotificationTemplateService {
     private final TemplateEngine templateEngine;
     private final NotificationProperties properties;
 
-    public String build(NotificationConfig config, Transactions tx, RuleEngine.RuleEvaluationResult result) {
+    public String build(NotificationConfig config, Transactions tx, RuleEvaluationResult result) {
         String template = config.getMessageTemplate();
         if (template == null || template.isBlank()) {
             template = getDefaultTemplate();
