@@ -63,7 +63,7 @@ Configure your `application.properties`:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5433/fraud_detection
 spring.datasource.username=postgres
-spring.datasource.password=deltaq123
+spring.datasource.password=somesome
 spring.redis.host=localhost
 spring.redis.port=6379
 ```
@@ -73,9 +73,6 @@ spring.redis.port=6379
 ```bash
 ./gradlew bootRun
 ```
-
-The application will be available at `http://localhost:8080` 
-Frontend will be available at `http://localhost:3000`
 
 ## API Endpoints
 
@@ -94,19 +91,6 @@ Frontend will be available at `http://localhost:3000`
 | prometheus | 9090 | metrics collection |
 | grafana | 3001 | visualization dashboard |
 | graylog | 9000 | log management |
-
-## Project Structure
-
-- `src/main/java/com/jvmd/transationapp/` - Main package
-  - `controller/` - REST API controllers
-  - `service/` - Business logic services
-  - `model/` - JPA entities
-  - `repository/` - Repository interfaces
-  - `dto/` - Data transfer objects
-  - `config/` - Configuration classes
-- `fraud-detection-frontend/` - Next.js frontend application
-- `monitoring/` - Monitoring configuration files
-- `ml-model/` - Machine learning model module
 
 ## Examples
 
