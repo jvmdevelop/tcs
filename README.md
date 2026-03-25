@@ -177,6 +177,6 @@ The application integrates with AI models for:
 
 ## License
 
-ISC — see [LICENSE](LICENSE) for details.
+ISC — see [LICENSE](backend/LICENSE) for details.
 
 ## EOF
