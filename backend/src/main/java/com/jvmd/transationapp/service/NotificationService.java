@@ -1,13 +1,9 @@
 package com.jvmd.transationapp.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.*;
 import com.jvmd.transationapp.repository.NotificationConfigRepository;
 import com.jvmd.transationapp.repository.NotificationLogRepository;
 import com.jvmd.transationapp.service.notification.Senders;
-import com.jvmd.transationapp.service.notification.impl.EmailNotificationSender;
-import com.jvmd.transationapp.service.notification.impl.TelegramNotificationSender;
-import com.jvmd.transationapp.service.notification.impl.WebhookNotificationSender;
 import com.jvmd.transationapp.service.rules.RuleEngine;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

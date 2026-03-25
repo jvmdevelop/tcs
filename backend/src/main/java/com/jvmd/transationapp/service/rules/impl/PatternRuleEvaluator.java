@@ -1,10 +1,11 @@
-package com.jvmd.transationapp.service.rules;
+package com.jvmd.transationapp.service.rules.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.Rule;
 import com.jvmd.transationapp.model.Transactions;
 import com.jvmd.transationapp.repository.TransactionRepository;
+import com.jvmd.transationapp.service.rules.RuleEvaluator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class PatternRuleEvaluator implements RuleEvaluator{
+public class PatternRuleEvaluator implements RuleEvaluator {
     private final ObjectMapper objectMapper;
     private final TransactionRepository transactionRepository;
 

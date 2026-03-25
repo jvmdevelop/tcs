@@ -1,8 +1,6 @@
 package com.jvmd.transationapp.service.rules;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.Rule;
-import com.jvmd.transationapp.model.RuleType;
 import com.jvmd.transationapp.model.Transactions;
 import com.jvmd.transationapp.repository.RuleRepository;
 import lombok.Data;
