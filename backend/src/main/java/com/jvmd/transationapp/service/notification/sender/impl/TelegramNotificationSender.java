@@ -1,14 +1,13 @@
-package com.jvmd.transationapp.service.notification.impl;
+package com.jvmd.transationapp.service.notification.sender.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.config.TelegramConfig;
 import com.jvmd.transationapp.model.NotificationConfig;
 import com.jvmd.transationapp.model.Transactions;
-import com.jvmd.transationapp.service.notification.NotificationSender;
+import com.jvmd.transationapp.service.notification.sender.NotificationSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 

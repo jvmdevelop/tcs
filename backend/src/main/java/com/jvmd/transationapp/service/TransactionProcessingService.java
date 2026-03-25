@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.EStatus;
 import com.jvmd.transationapp.model.Transactions;
 import com.jvmd.transationapp.repository.TransactionRepository;
+import com.jvmd.transationapp.service.notification.NotificationService;
 import com.jvmd.transationapp.service.rules.RuleEngine;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

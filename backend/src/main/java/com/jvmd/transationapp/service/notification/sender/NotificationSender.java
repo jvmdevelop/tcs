@@ -1,4 +1,4 @@
-package com.jvmd.transationapp.service.notification;
+package com.jvmd.transationapp.service.notification.sender;
 
 import com.jvmd.transationapp.model.NotificationConfig;
 import com.jvmd.transationapp.model.Transactions;
