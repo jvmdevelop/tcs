@@ -58,7 +58,6 @@ services:
       - prometheus
     restart: always
 
-  # Логирование: MongoDB для Graylog
   mongodb:
     image: mongo:7.0
     container_name: fraud-mongodb
@@ -71,7 +70,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Логирование: Elasticsearch для Graylog
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
     container_name: fraud-elasticsearch
@@ -90,13 +88,11 @@ services:
       timeout: 10s
       retries: 5
 
-  # Логирование: Graylog
   graylog:
     image: graylog/graylog:5.2
     container_name: fraud-graylog
     environment:
       - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
-      # Password: admin
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
       - GRAYLOG_HTTP_EXTERNAL_URI=http://localhost:9000/
       - GRAYLOG_ELASTICSEARCH_HOSTS=http://elasticsearch:9200
@@ -104,11 +100,11 @@ services:
     volumes:
       - graylog-data:/usr/share/graylog/data
     ports:
-      - "9000:9000"      # Graylog web interface
-      - "12201:12201/udp" # GELF UDP
-      - "12201:12201/tcp" # GELF TCP
-      - "1514:1514"       # Syslog TCP
-      - "1514:1514/udp"   # Syslog UDP
+      - "9000:9000"
+      - "12201:12201/udp"
+      - "12201:12201/tcp"
+      - "1514:1514"
+      - "1514:1514/udp"
     depends_on:
       elasticsearch:
         condition: service_healthy
