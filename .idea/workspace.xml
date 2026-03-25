@@ -5,104 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bb89f6-3a82-4e7a-ab44-563e6a7773ed" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/postcss.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/public/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/.gitkeep" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/app/rules/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/rules/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/app/transactions/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/transactions/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/app/transactions/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/transactions/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/components/layout/DashboardLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layout/DashboardLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/components/layout/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layout/Sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/components/providers/Providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/providers/Providers.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/components/rules/RuleModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/rules/RuleModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/lib/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/lib/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/store/mobx.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/mobx.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/store/redux.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/redux.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/src/store/zustand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/zustand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tailwind.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fraud-detection-frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/backend/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/backend/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/backend/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/fraud-detection.2025-10-18.log" beforeDir="false" afterPath="$PROJECT_DIR$/backend/logs/fraud-detection.2025-10-18.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/fraud-detection.log" beforeDir="false" afterPath="$PROJECT_DIR$/backend/logs/fraud-detection.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitoring/dashboards/dashboard-provider.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/monitoring/dashboards/dashboard-provider.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitoring/dashboards/fraud-detection-dashboard.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/monitoring/dashboards/fraud-detection-dashboard.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitoring/grafana-dashboard.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/monitoring/grafana-dashboard.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitoring/grafana-datasources.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/monitoring/grafana-datasources.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monitoring/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/monitoring/prometheus.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postman-collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/postman-collection.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/TransationAppApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/TransationAppApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/config/AsyncConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/config/AsyncConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/config/NotificationSendProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/config/NotificationSendProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/config/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/config/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/config/WebClientConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/controller/AdminRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/controller/AdminRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/controller/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/DashboardStatsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/DashboardStatsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/ErrorResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/PageResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/PageResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/RuleRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/RuleRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/RuleResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/RuleResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/TransactionDetailsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/TransactionDetailsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/TransactionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/TransactionRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/dto/TransactionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/dto/TransactionResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/EStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/EStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/NotificationChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/NotificationChannel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/NotificationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/NotificationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/NotificationLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/NotificationLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/RuleChangeHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/RuleChangeHistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/RuleType.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/RuleType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/model/Transactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/model/Transactions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/repository/NotificationConfigRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/repository/NotificationConfigRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/repository/NotificationLogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/repository/NotificationLogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/repository/RuleChangeHistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/repository/RuleChangeHistoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/repository/RuleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/repository/RuleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/repository/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/repository/TransactionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/DataInitializationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/DataInitializationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/LLMService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/LLMService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/MetricsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/MetricsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/NotificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/QueueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/QueueService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/TransactionProcessingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/TransactionProcessingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/TransactionQueueWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/TransactionQueueWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/notification/EmailNotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/notification/EmailNotificationSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/notification/TelegramNotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/notification/TelegramNotificationSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/notification/WebhookNotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/notification/WebhookNotificationSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/rules/CompositeRuleEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/rules/CompositeRuleEvaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/rules/MLRuleEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/rules/MLRuleEvaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/rules/PatternRuleEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/rules/PatternRuleEvaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/rules/RuleEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/rules/RuleEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jvmd/transationapp/service/rules/ThresholdRuleEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/jvmd/transationapp/service/rules/ThresholdRuleEvaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/logback-spring.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/jvmd/transationapp/TransationAppApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/jvmd/transationapp/TransationAppApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/jvmd/transationapp/TransationAppApplicationTests.java.backup" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/jvmd/transationapp/TransationAppApplicationTests.java.backup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env.example" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,10 +32,10 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="3BOZba5c0rzeBs4SNoDNU7gfjEu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -142,15 +46,18 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "dev",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/dieno/projects/tcs/backend",
+    "last_opened_file_path": "/home/dieno/projects/tcs",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
@@ -158,6 +65,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/backend" />
     </key>
   </component>
@@ -177,6 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1774362150570</updated>
       <workItem from="1774362152741" duration="196000" />
+      <workItem from="1774439918194" duration="372000" />
     </task>
     <servers />
   </component>
