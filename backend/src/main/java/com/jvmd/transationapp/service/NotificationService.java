@@ -1,20 +1,19 @@
 package com.jvmd.transationapp.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.*;
 import com.jvmd.transationapp.repository.NotificationConfigRepository;
 import com.jvmd.transationapp.repository.NotificationLogRepository;
-import com.jvmd.transationapp.service.notification.EmailNotificationSender;
-import com.jvmd.transationapp.service.notification.TelegramNotificationSender;
-import com.jvmd.transationapp.service.notification.WebhookNotificationSender;
+import com.jvmd.transationapp.service.notification.Senders;
+import com.jvmd.transationapp.service.notification.impl.EmailNotificationSender;
+import com.jvmd.transationapp.service.notification.impl.TelegramNotificationSender;
+import com.jvmd.transationapp.service.notification.impl.WebhookNotificationSender;
 import com.jvmd.transationapp.service.rules.RuleEngine;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +25,7 @@ public class NotificationService {
 
     private final NotificationConfigRepository configRepository;
     private final NotificationLogRepository logRepository;
-    private final EmailNotificationSender emailSender;
-    private final TelegramNotificationSender telegramSender;
-    private final WebhookNotificationSender webhookSender;
-    private final ObjectMapper objectMapper;
-
+    private final Senders senders;
 
     public void sendAlertNotifications(Transactions transaction, RuleEngine.RuleEvaluationResult result) {
         String correlationId = transaction.getCorrelationId();
@@ -38,8 +33,8 @@ public class NotificationService {
         MDC.put("component", "notification");
 
         try {
-            log.info("Sending alert notifications: transactionId={}, severity={}", 
-                transaction.getId(), result.getMaxSeverity());
+            log.info("Sending alert notifications: transactionId={}, severity={}",
+                    transaction.getId(), result.getMaxSeverity());
 
             List<NotificationConfig> configs = configRepository.findByEnabledTrue();
 
@@ -72,20 +67,16 @@ public class NotificationService {
             String message = buildMessage(config, transaction, result);
             notificationLog.setMessage(message);
 
-            boolean success = switch (config.getChannel()) {
-                case EMAIL -> emailSender.send(config, message, transaction);
-                case TELEGRAM -> telegramSender.send(config, message, transaction);
-                case WEBHOOK -> webhookSender.send(config, message, transaction);
-            };
+            boolean success = senders.getSender(config.getChannel()).send(config, message, transaction);
 
             notificationLog.setStatus(success ? "SUCCESS" : "FAILED");
-            
+
             if (success) {
-                log.info("Notification sent successfully: channel={}, transactionId={}", 
-                    config.getChannel(), transaction.getId());
+                log.info("Notification sent successfully: channel={}, transactionId={}",
+                        config.getChannel(), transaction.getId());
             } else {
-                log.warn("Notification failed: channel={}, transactionId={}", 
-                    config.getChannel(), transaction.getId());
+                log.warn("Notification failed: channel={}, transactionId={}",
+                        config.getChannel(), transaction.getId());
             }
 
         } catch (Exception e) {
@@ -136,23 +127,23 @@ public class NotificationService {
 
     private String getDefaultTemplate() {
         return """
-            FRAUD ALERT
-            
-            Transaction ID: {{transactionId}}
-            Correlation ID: {{correlationId}}
-            Amount: {{amount}}
-            From: {{from}}
-            To: {{to}}
-            Type: {{type}}
-            Time: {{timestamp}}
-            
-            Severity: {{severity}}/5
-            ML Score: {{mlScore}}
-            Triggered Rules: {{triggeredRules}}
-            
-            Reasons: {{reasons}}
-            
-            Details: {{detailsUrl}}
-            """;
+                FRAUD ALERT
+                
+                Transaction ID: {{transactionId}}
+                Correlation ID: {{correlationId}}
+                Amount: {{amount}}
+                From: {{from}}
+                To: {{to}}
+                Type: {{type}}
+                Time: {{timestamp}}
+                
+                Severity: {{severity}}/5
+                ML Score: {{mlScore}}
+                Triggered Rules: {{triggeredRules}}
+                
+                Reasons: {{reasons}}
+                
+                Details: {{detailsUrl}}
+                """;
     }
 }

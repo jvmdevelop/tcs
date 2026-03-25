@@ -17,7 +17,7 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class PatternRuleEvaluator {
+public class PatternRuleEvaluator implements RuleEvaluator{
     private final ObjectMapper objectMapper;
     private final TransactionRepository transactionRepository;
 
@@ -25,7 +25,7 @@ public class PatternRuleEvaluator {
         try {
             Map<String, Object> config = objectMapper.readValue(
                     rule.getConfiguration(),
-                    new TypeReference<Map<String, Object>>() {
+                    new TypeReference<>() {
                     }
             );
             String patternType = (String) config.get("type");

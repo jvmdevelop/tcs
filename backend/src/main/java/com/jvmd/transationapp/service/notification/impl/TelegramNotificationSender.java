@@ -1,9 +1,11 @@
-package com.jvmd.transationapp.service.notification;
+package com.jvmd.transationapp.service.notification.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jvmd.transationapp.config.TelegramConfig;
 import com.jvmd.transationapp.model.NotificationConfig;
 import com.jvmd.transationapp.model.Transactions;
+import com.jvmd.transationapp.service.notification.NotificationSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,19 +18,15 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class TelegramNotificationSender {
+public class TelegramNotificationSender implements NotificationSender {
 
     private final ObjectMapper objectMapper;
     private final WebClient.Builder webClientBuilder;
+    private final TelegramConfig tgConfig;
 
-    @Value("${app.telegram.bot-token:}")
-    private String botToken;
-
-    @Value("${app.telegram.enabled:false}")
-    private boolean enabled;
 
     public boolean send(NotificationConfig config, String message, Transactions transaction) {
-        if (!enabled || botToken == null || botToken.isEmpty()) {
+        if (!tgConfig.isEnabled() || tgConfig.getBotToken() == null || tgConfig.getBotToken().isEmpty()) {
             log.warn("Telegram notifications are disabled or bot token is not configured");
             return false;
         }
@@ -36,7 +34,7 @@ public class TelegramNotificationSender {
         try {
             Map<String, Object> telegramConfig = objectMapper.readValue(
                     config.getConfiguration(),
-                    new TypeReference<Map<String, Object>>() {
+                    new TypeReference<>() {
                     }
             );
 
@@ -48,7 +46,7 @@ public class TelegramNotificationSender {
             request.put("parse_mode", "HTML");
 
             WebClient webClient = webClientBuilder.build();
-            String url = String.format("https://api.telegram.org/bot%s/sendMessage", botToken);
+            String url = String.format("https://api.telegram.org/bot%s/sendMessage", tgConfig.getBotToken());
 
             webClient.post()
                     .uri(url)

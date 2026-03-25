@@ -5,6 +5,7 @@ import com.jvmd.transationapp.model.Rule;
 import com.jvmd.transationapp.model.RuleType;
 import com.jvmd.transationapp.model.Transactions;
 import com.jvmd.transationapp.repository.RuleRepository;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -18,11 +19,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class RuleEngine {
     private final RuleRepository ruleRepository;
-    private final ThresholdRuleEvaluator thresholdEvaluator;
-    private final PatternRuleEvaluator patternEvaluator;
-    private final CompositeRuleEvaluator compositeEvaluator;
-    private final MLRuleEvaluator mlRuleEvaluator;
-    private final ObjectMapper objectMapper;
     private List<Rule> activeRules = new ArrayList<>();
 
     @PostConstruct
@@ -84,15 +80,10 @@ public class RuleEngine {
     }
 
     private boolean evaluateRule(Rule rule, Transactions transaction) {
-        return switch (rule.getType()) {
-            case THRESHOLD -> thresholdEvaluator.evaluate(rule, transaction);
-            case PATTERN -> patternEvaluator.evaluate(rule, transaction);
-            case COMPOSITE -> compositeEvaluator.evaluate(rule, transaction);
-            case ML_RULE -> mlRuleEvaluator.evaluate(rule, transaction);
-        };
+        return ;
     }
 
-    @lombok.Data
+    @Data
     public static class RuleEvaluationResult {
         private UUID transactionId;
         private String correlationId;

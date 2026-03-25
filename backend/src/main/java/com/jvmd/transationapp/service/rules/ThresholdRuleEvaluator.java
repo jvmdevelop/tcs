@@ -14,14 +14,14 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class ThresholdRuleEvaluator {
+public class ThresholdRuleEvaluator implements RuleEvaluator{
     private final ObjectMapper objectMapper;
 
     public boolean evaluate(Rule rule, Transactions transaction) {
         try {
             Map<String, Object> config = objectMapper.readValue(
                     rule.getConfiguration(),
-                    new TypeReference<Map<String, Object>>() {
+                    new TypeReference<>() {
                     }
             );
             String field = (String) config.get("field");

@@ -1,9 +1,10 @@
-package com.jvmd.transationapp.service.notification;
+package com.jvmd.transationapp.service.notification.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.NotificationConfig;
 import com.jvmd.transationapp.model.Transactions;
+import com.jvmd.transationapp.service.notification.NotificationSender;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,7 +16,7 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class EmailNotificationSender {
+public class EmailNotificationSender implements NotificationSender {
     private final JavaMailSender mailSender;
     private final ObjectMapper objectMapper;
 
@@ -23,7 +24,7 @@ public class EmailNotificationSender {
         try {
             Map<String, Object> emailConfig = objectMapper.readValue(
                     config.getConfiguration(),
-                    new TypeReference<Map<String, Object>>() {
+                    new TypeReference<>() {
                     }
             );
             String to = (String) emailConfig.get("to");

@@ -11,7 +11,6 @@ import ai.djl.translate.Batchifier;
 import ai.djl.translate.TranslateException;
 import ai.djl.translate.Translator;
 import ai.djl.translate.TranslatorContext;
-import com.jvmd.fraud.model.FraudDetectionModel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jvmd.transationapp.model.Rule;
@@ -30,7 +29,7 @@ import java.util.Map;
 
 @Component
 @Slf4j
-public class MLRuleEvaluator {
+public class MLRuleEvaluator implements RuleEvaluator{
 
     private final ObjectMapper objectMapper;
     
@@ -144,8 +143,7 @@ public class MLRuleEvaluator {
         String fullModelName = modelName + "-" + modelVersion;
         Path modelPath = modelDir.resolve(fullModelName + "-0000.params");
 
-        FraudDetectionModel fraudModel = new FraudDetectionModel(inputSize, new int[]{64, 32});
-        return fraudModel.newBlock(model, modelPath, null);
+        return null;
     }
 
     public boolean isModelLoaded() {
@@ -175,7 +173,7 @@ public class MLRuleEvaluator {
             }
             Map<String, Object> config = objectMapper.readValue(
                     rule.getConfiguration(),
-                    new TypeReference<Map<String, Object>>() {
+                    new TypeReference<>() {
                     }
             );
             double threshold = config.containsKey("threshold")
